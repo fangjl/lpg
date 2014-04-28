@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.hyq.lpg.repository.mybatis.AnalysisDao">
+
+	<!-- 查询总回流曲线图     
+		 params: 
+	 1:	type: 时间基线类型  , 1:钢瓶生产时间，2：钢瓶注册时间， 3:钢瓶首次充装时间，
+	 2：	start_time :时间基线的开始时间 
+	 3：	end_time :时间基线的结束时间 
+	 4：	monthNumber：月份   如： monthNumber=6 ：代表从6个月 前到现在 的钢瓶回流情况 
+	 5: tenantcode  租户编号
+	 -->
+	<select id="queryGasTankTotalReturnRate" parameterType="hashmap" resultType="map">
+			select 
+			    count(distinct n.gpbm) / (select 
+			            count(1)
+			        from
+			            gas_tank_${tenantcode} 
+			        where
+			           tenantcode = #{tenantcode} and ywzt = 0 
+			            	<if test="type==1">
+			            	and  scrq <![CDATA[>=]]> #{start_time} 
+			            	and  scrq <![CDATA[<=]]> #{end_time}
+			                </if>
+			                <if test="type==2">
+			            	and jdsj <![CDATA[>=]]> #{start_time}  
+			            	and jdsj <![CDATA[<=]]> #{end_time}
+			                </if>
+			                <if test="type==3">
+			            	and first_czsj <![CDATA[>=]]> #{start_time}  
+			            	and  first_czsj <![CDATA[<=]]> #{end_time}
+			                </if>
+			                ) as y,
+			    m.yue as x
+			from
+			    (select 
+			        date_format(a.czkssj, '%Y-%m') as yue
+			    from
+			        fill_records_${tenantcode} a 
+			    where tenantcode = #{tenantcode}
+			        and czkssj between date_sub(now(), interval #{monthNumber} month) and now()
+			    group by 1) m,
+			    (select 
+			        a.gpbm, date_format(a.czkssj, '%Y-%m') as yue
+			    from
+			        fill_records_${tenantcode} a
+			    left join gas_tank_${tenantcode}  b ON (b.ywzt = 0 and a.gpbm = b.gpbm
+			        and a.tenantcode = b.tenantcode)
+			    where
+			        a.tenantcode = #{tenantcode}
+			            and czkssj between date_sub(now(), interval #{monthNumber} month) and now()
+			           
+			           		<if test="type==1">
+			            	and  scrq <![CDATA[>=]]> #{start_time} 
+			            	and  scrq <![CDATA[<=]]> #{end_time}
+			                </if>
+			                <if test="type==2">
+			            	and jdsj <![CDATA[>=]]> #{start_time}  
+			            	and jdsj <![CDATA[<=]]> #{end_time}
+			                </if>
+			                <if test="type==3">
+			            	and first_czsj <![CDATA[>=]]> #{start_time}  
+			            	and  first_czsj <![CDATA[<=]]> #{end_time}
+			                </if>
+			            
+			    order by a.czkssj asc) n
+			where
+			    m.yue >= n.yue
+			group by m.yue
+			  
+	</select>
+	
+	<!-- 单个租户钢瓶出厂年份注销图 -->
+	<select id="queryGasTankYearKPI" parameterType="hashmap" resultType="map">
+		select count(1) as y, date_format(scrq,'%Y') as x
+		from gas_tank_${tenantcode} 
+		group by date_format(scrq,'%Y')
+	</select>
+	<!-- 统计各站点钢瓶占有量 -->
+	<select id="queryGasTankDonutChart" parameterType="hashmap"  resultType="map">
+			select count(1) as value  ,officecode as label
+			FROM
+			gas_tank_${tenantcode} 
+			where #{tenantcode}
+			group by  officecode
+	</select>
+	
+	
+	<!-- 查询批次曲线图      params:  zzcs :充装次数    , scrq：充装时间, scrq:生产日期  -->
+	<select id="queryGasTankBatchReturnRate" parameterType="hashmap" resultType="map">
+			  select date_format(jdsj, '%Y-%m') as x,count(1) as y
+			   from  
+				gas_tank_${tenantcode}
+				group by date_format(jdsj, '%Y-%m') 
+	</select>
+	
+	
+	
+</mapper> 

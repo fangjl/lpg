@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${catalina.base}/logs/lpg.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${catalina.base}/logs/lpg.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- project default level -->
+	<logger name="com.hyq.lpg" level="INFO" />
+	<logger name="org.springside" level="INFO"/>
+	<!--log4jdbc -->
+	<logger name="jdbc.sqltiming" level="INFO"/>
+
+	<logger name="org.hibernate" 		level="INFO"/>
+	<logger name="org.spring"    		level="INFO"/>
+	<logger name="org.springside"    	level="INFO"/>
+	<logger name="org.apache.shiro"     level="INFO"/>
+	<logger name="com.opensymphony"     level="INFO"/>
+	<logger name="org.apache.activemq"  level="INFO"/>
+	<logger name="org.apache.ibatis"    level="INFO"/>
+	<logger name="org.mybatis.spring"   level="INFO"/>
+	<logger name="druid.sql"    level="INFO"/>
+		<logger name="druid.sql.DataSource"    level="INFO"/>
+		<logger name="druid.sql.Statement"    level="INFO"/>
+	
+	
+	
+	<logger name="com.hyq.lpg.cas"    level="INFO"/>
+	
+	
+	<logger name="jdbc.sqlonly"       level="OFF"/>
+	<logger name="jdbc.sqltiming"     level="INFO"/>
+	<logger name="jdbc.audit"     	  level="OFF"/>
+	<logger name="jdbc.resultset"     level="OFF"/>
+	<logger name="jdbc.connection"    level="OFF"/>
+	
+	<root level="WARN">
+		<appender-ref ref="console" />
+		<appender-ref ref="rollingFile" />
+	</root>
+</configuration>

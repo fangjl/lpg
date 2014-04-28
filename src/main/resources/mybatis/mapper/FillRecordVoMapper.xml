@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.hyq.lpg.repository.mybatis.MyBatisFillRecordVoDao">
+
+
+	<select id="queryFillRecordTrendChart" parameterType="hashmap"  resultType="map">
+		select count(1) as y ,date_format(czkssj,'%Y-%m') as x,officecode
+			FROM
+			
+		fill_records_${tenantcode}
+		where tenantcode=#{tenantcode} and officecode=#{officecode}
+		<if test="year = null or year = ''">
+				and DATE_FORMAT(czkssj,'%Y')=DATE_FORMAT(now(),'%Y')  
+		</if>
+		<if test="year != null and year != ''">
+				and DATE_FORMAT(czkssj,'%Y')= #{year}
+		</if>
+			group by  date_format(czkssj,'%Y-%m')
+	</select>
+	
+	<select id="queryFillRecordDonutChart" parameterType="hashmap"  resultType="map">
+		select count(1) as value  ,officecode as label
+			FROM
+			fill_records_${tenantcode}
+			where tenantcode=#{tenantcode}
+			group by  officecode
+
+	</select>
+	
+	
+	
+	<select id="queryFillRecordRankingChart" parameterType="hashmap" resultType="map">
+		select count(1) as y ,cjqbm as x
+		from fill_records_${tenantcode} 
+		<where>
+			tenantcode=#{tenantcode} and officecode=#{officecode}
+			<if test="type == 1">
+				and DATE_FORMAT(czkssj,'%Y-%m-%d')=DATE_FORMAT(now(),'%Y-%m-%d')  
+			</if>
+			<if test="type == 2">
+				and DATE_FORMAT(czkssj,'%Y-%m')=DATE_FORMAT(now(),'%Y-%m') 
+			</if>
+			group by cjqbm
+			order by cjqbm  asc 
+		</where>
+	</select>
+	
+	
+		<!-- 今日总共充装了多少瓶 -->
+	  <select id="queryFillRecordCount" parameterType="hashmap" resultType="int">
+			select count(1) as totoal
+			from fill_records_${tenantcode}
+			where
+			tenantcode=#{tenantcode}
+			and DATE_FORMAT(czkssj,'%Y-%m-%d')=DATE_FORMAT(now(),'%Y-%m-%d')  
+			
+		</select>
+		
+		
+		
+		<!-- 各个加气站今日充装总量排行 -->
+		<select id="queryFillRecordByOfficeCount" parameterType="hashmap" resultType="OfficeRecordVo">
+			select count(1) as total,officecode as officecode
+				FROM
+				fill_records_${tenantcode}
+				where tenantcode=#{tenantcode}
+			and DATE_FORMAT(czkssj,'%Y-%m-%d')=DATE_FORMAT(now(),'%Y-%m-%d')  
+			group by  officecode
+			order by total desc
+		</select>
+		
+		
+		<insert id="saveTenantFillRecords" parameterType="com.hyq.lpg.entity.FillRecords"  keyColumn="id" useGeneratedKeys="true" flushCache="true" keyProperty="id">
+				insert into fill_records_${tenantcode}(
+				  barcode ,
+				  cjqbm ,
+				  cszl,
+				  czjz ,
+				  czkssj ,
+				  czyxsj ,
+				  czzt,
+				  del_flag,
+				  ggxh ,
+				  gpbm ,
+				  kfbm ,
+				  mbzl ,
+				  officecode,
+				  recid ,
+				  resouce ,
+				  rfidcode ,
+				  tenantcode ,
+				  zdbm
+								
+				) values(
+				 #{barcode} ,
+				 #{cjqbm },
+				 #{cszl},
+				 #{czjz} ,
+				 #{czkssj} ,
+				 #{czyxsj} ,
+				 #{czzt},
+				 #{del_flag},
+				 #{ggxh },
+				 #{gpbm} ,
+				 #{kfbm} ,
+				 #{mbzl} ,
+				 #{officecode},
+				 #{recid} ,
+				 #{resouce },
+				 #{rfidcode} ,
+				 #{tenantcode} ,
+				 #{zdbm}
+				)
+		</insert> 
+		
+	<insert id="saveTenantOriginalFillRecords" parameterType="com.hyq.lpg.entity.FillRecords"  keyColumn="id" useGeneratedKeys="true" flushCache="true" keyProperty="id">
+				insert into original_fill_records_${tenantcode}(
+				  barcode ,
+				  cjqbm ,
+				  cszl,
+				  czjz ,
+				  czkssj ,
+				  czyxsj ,
+				  czzt,
+				  del_flag,
+				  ggxh ,
+				  gpbm ,
+				  kfbm ,
+				  mbzl ,
+				  officecode,
+				  recid ,
+				  resouce ,
+				  rfidcode ,
+				  tenantcode ,
+				  zdbm
+								
+				) values(
+				 #{barcode} ,
+				 #{cjqbm },
+				 #{cszl},
+				 #{czjz} ,
+				 #{czkssj} ,
+				 #{czyxsj} ,
+				 #{czzt},
+				 #{del_flag},
+				 #{ggxh },
+				 #{gpbm} ,
+				 #{kfbm} ,
+				 #{mbzl} ,
+				 #{officecode},
+				 #{recid} ,
+				 #{resouce },
+				 #{rfidcode} ,
+				 #{tenantcode} ,
+				 #{zdbm}
+				)
+		</insert> 
+		
+<!--综合查询  -->
+	<select id="queryTenantFillRecords"  resultType="FillRecords">
+		
+		select * from fill_records_${tenantcode} 
+		
+		<where>
+		 	<!-- 所属气站 -->
+			 <if test="EQ_officecode != null and EQ_officecode != ''">
+				and officecode = #{EQ_officecode}
+			</if>
+			<!-- 钢瓶编码 -->
+			<if test="LIKE_gpbm!= null and LIKE_gpbm != ''">
+				and gpbm like '%${LIKE_gpbm}%'
+			</if>
+			
+			<!-- 建档时间 -->
+			<if test="GTE_czkssj != null and GTE_czkssj != ''">
+				and czkssj <![CDATA[>=]]> #{GTE_czkssj}
+			</if>
+			
+			<if test="LTE_czkssj != null and LTE_czkssj != ''">
+				and czkssj <![CDATA[<=]]> #{LTE_czkssj}
+			</if>
+			
+			
+		</where>
+			order by czkssj desc
+	</select>
+	
+	
+	
+	
+	<!-- 验证该瓶今天否充装过  -->
+	<select id="checkDayAdd"   resultType="int">
+		select count(1) from fill_records_${tenantcode} where DATE_FORMAT(czkssj,'%Y-%m-%d')=DATE_FORMAT(#{czkssj},'%Y-%m-%d') and gpbm=#{gpbm}
+	</select>
+	
+	<!-- 验证该瓶今天否充装过  -->
+	<select id="updateCZSJ" >
+		update fill_records_${tenantcode} set czkssj=#{czkssj} where DATE_FORMAT(czkssj,'%Y-%m-%d')=DATE_FORMAT(#{czkssj},'%Y-%m-%d') and gpbm=#{gpbm}
+	</select>
+	<!-- 修改钢瓶的充装次数 和充装时间 -->
+	<update id="updateGasTank">
+		update gas_tank_${tenantcode} set zzcs=zzcs+1  , czsj=#{czkssj} where gpbm=#{gpbm}
+	</update>
+</mapper> 

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.hyq.lpg.repository.mybatis.AutoSchemaDao">
+
+	<!-- 今日建档瓶数统计 -->
+	<select id="exsitTenantFillRecordTable" parameterType="String" resultType="int" >
+			select count(1) 
+			from 
+			INFORMATION_SCHEMA.TABLES a
+			where a.TABLE_SCHEMA='lpg'
+			and 
+			a.TABLE_NAME=#{tenantcode}
+	</select>
+	
+	<update id="createTenantFillRecordTable" parameterType="int" statementType="PREPARED">
+		CREATE TABLE fill_records_#{tenantcode} (
+			  id bigint(20) NOT NULL AUTO_INCREMENT,
+			  barcode varchar(255) DEFAULT NULL,
+			  cjqbm int(20) DEFAULT NULL,
+			  cszl double DEFAULT NULL,
+			  czjz double DEFAULT NULL,
+			  czkssj datetime DEFAULT NULL,
+			  czyxsj int(11) DEFAULT NULL,
+			  czzt int(11) DEFAULT NULL,
+			  del_flag int(11) DEFAULT 0,
+			  ggxh varchar(255) DEFAULT NULL,
+			  gpbm varchar(255) DEFAULT NULL,
+			  kfbm varchar(255) DEFAULT NULL,
+			  mbzl double DEFAULT NULL,
+			  officecode varchar(255) DEFAULT NULL,
+			  recid bigint(20) DEFAULT NULL,
+			  resouce int(11) DEFAULT NULL,
+			  rfidcode varchar(255) DEFAULT NULL,
+			  tenantcode varchar(255) DEFAULT NULL,
+			  zdbm varchar(255) DEFAULT NULL,
+		   	  PRIMARY KEY (id),
+		      KEY gpbm (gpbm,tenantcode)
+		      ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+		
+	</update>
+</mapper> 

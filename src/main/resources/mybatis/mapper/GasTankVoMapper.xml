@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.hyq.lpg.repository.mybatis.GasTankVoDao">
+
+	
+	
+	
+	<!-- 今日建档瓶数统计 -->
+	<select id="queryGasTankCount" parameterType="hashmap" resultType="int">
+			select count(1) as totoal
+			from gas_tank_${tenantcode}  
+			where
+			tenantcode=#{tenantcode}
+			and DATE_FORMAT(jdsj,'%Y-%m-%d')=DATE_FORMAT(now(),'%Y-%m-%d')  
+	</select>
+	
+	
+	
+	<!-- 保存钢瓶档案数据 -->
+	
+	<insert id="saveTenantGasTank" parameterType="com.hyq.lpg.entity.GasTank"  keyColumn="id" useGeneratedKeys="true" flushCache="true" keyProperty="id">
+	
+	
+
+
+	insert into gas_tank_${tenantcode}(
+				 tenantcode,
+				 officecode,
+				 gpbm,
+				 xpbm,
+				 jdsj,
+				 jdr,
+				 gpid,
+				 zdbm,
+				 scrq,
+				 sccj,
+				 ggxh,
+				 medium,
+				 gplx,
+				 pz,
+				 synx,
+				 qjzq,
+				 jdfs,
+				 ywzt,
+				 gpzt,
+				 last_check_time,
+				 next_check_time
+	)values(
+				 
+				 #{tenantcode} ,
+				 #{officecode },
+				 #{gpbm},
+				 #{xpbm} ,
+				 #{jdsj} ,
+				 #{jdr} ,
+				 #{gpid},
+				 #{zdbm},
+				 #{scrq},
+				 #{sccj} ,
+				 #{ggxh} ,
+				 #{medium} ,
+				 #{gplx} ,
+				 #{pz} ,
+				 #{synx} ,
+				 #{qjzq} ,
+				 #{jdfs} ,
+				 #{ywzt} ,
+				 #{gpzt} ,
+				 #{lastCheckTime} ,
+				 #{nextCheckTime} 
+				 
+	)
+	
+	</insert>
+	
+	
+	
+	<!-- 综合查询 -->
+	<select id="queryTenantGasTank"  resultType="GasTank">
+	
+		select officecode ,gpbm,ggxh, DATEDIFF(now(),czsj) as lsts,gplx,scrq,jdsj,pz,fpr,zzcs,next_check_time as lastCheckTime,czsj,gpzt from gas_tank_${tenantcode} 
+		 <where>
+		 	<!-- 所属气站 -->
+			 <if test="EQ_officecode != null and EQ_officecode != ''">
+				and officecode = #{EQ_officecode}
+			</if>
+			<!-- 钢瓶编码 -->
+			<if test="LIKE_gpbm != null and LIKE_gpbm != ''">
+				and gpbm like '%${LIKE_gpbm}%'
+			</if>
+			<!-- 生产厂家 -->
+			<if test="EQ_sccj != null and EQ_sccj != ''">
+				and sccj = #{EQ_sccj}
+			</if>
+			<!-- 充装次数大于登入 -->
+			<if test="GT_zzcs != null and GT_zzcs != ''">
+				and zzcs  <![CDATA[>=]]> #{GT_zzcs}
+			</if>
+			<!-- 流失天数大于 -->
+			<if test="GT_lsts != null and GT_lsts != ''">
+				and DATEDIFF(now(),czsj) <![CDATA[>=]]> #{GT_lsts}
+			</if>
+			
+			<!-- 钢瓶状态  -->
+			<if test="EQ_gpzt != null and EQ_gpzt != ''">
+				and gpzt = #{EQ_gpzt}
+			</if>
+			
+			
+			<!-- 生产时间-->
+			<if test="GTE_scrq != null and GTE_scrq != ''">
+				and scrq <![CDATA[>=]]> #{GTE_scrq}
+			</if>
+			
+			<if test="LTE_scrq != null and LTE_scrq != ''">
+				and scrq <![CDATA[<=]]> #{LTE_scrq}
+			</if>
+			<!-- 最后充装时间-->
+			<if test="GTE_czsj != null and GTE_czsj != ''">
+				and czsj <![CDATA[>=]]> #{GTE_czsj}
+			</if>
+			
+			<if test="LTE_czsj != null and LTE_czsj != ''">
+				and czsj <![CDATA[<=]]> #{LTE_czsj}
+			</if>
+			<!-- 建档时间 -->
+			<if test="GTE_jdsj != null and GTE_jdsj != ''">
+				and jdsj <![CDATA[>=]]> #{GTE_jdsj}
+			</if>
+			
+			<if test="LTE_jdsj != null and LTE_jdsj != ''">
+				and jdsj <![CDATA[<=]]> #{LTE_jdsj}
+			</if>
+			
+			and del_flag = '0'
+			order by jdsj desc
+		</where>
+		
+	</select>
+	
+	
+	
+	
+	
+	
+	
+</mapper> 

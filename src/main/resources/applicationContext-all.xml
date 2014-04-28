@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<description>导入ShowCase中的applicationContext文件列表</description>
+
+	<!--
+		 必须放在第一
+	 -->
+	<import resource="shiro/applicationContext-shiro-cas.xml" />
+
+	<!-- mybatis  -->
+	<import resource="mybatis/applicationContext-mybatis-config.xml" />
+	<!-- 可配置 -->
+	<import resource="jms/applicationContext-jms.xml" />
+	
+</beans>

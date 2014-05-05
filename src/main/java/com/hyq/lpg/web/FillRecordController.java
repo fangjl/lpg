@@ -1,6 +1,4 @@
 package com.hyq.lpg.web;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletRequest;
@@ -68,30 +66,25 @@ public class FillRecordController {
 	@RequestMapping(value="/queryFillRecordPageData",method = RequestMethod.GET)
 	public org.springframework.http.ResponseEntity<Map> queryFillRecordPageData(
 			FillRecords fillRecords,
-			@RequestParam(value = "iDisplayStart", defaultValue = "0") int start,
-			@RequestParam(value = "iDisplayLength", defaultValue = "4") int pageSize,
-			@RequestParam(value = "sEcho", defaultValue = "1") String sEcho,
-			@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
-			@RequestParam(value = "czsj" ,defaultValue = "") String czsj,
+			@RequestParam(value = "iDisplayStart",  defaultValue  = "0"       ) int start,
+			@RequestParam(value = "iDisplayLength", defaultValue  = "4"       ) int pageSize,
+			@RequestParam(value = "sEcho",          defaultValue  = "1"       ) String sEcho,
+			@RequestParam(value = "sortType",       defaultValue  = "auto"    ) String sortType,
+			@RequestParam(value = "czsj" ,          defaultValue  = ""        ) String czsj,
 			Model model,
 			HttpServletRequest request
 			){
 		com.hyq.lpg.common.Page p = new com.hyq.lpg.common.Page(request);
-		p.setPageNo(start);
+		p.setPageNo(start/pageSize+1);
 		p.setPageSize(pageSize);
 		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
 		searchParams.put("tenantcode", CasUtils.getCurrentPrincipal().getTenantcode());
-
-		try {
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-DD");
 			if(!StringUtils.isBlank(czsj)){
 				String[] czsjs = czsj.split("~");
-				searchParams.put("GTE_czkssj", sf.parse(czsjs[0]));
-				searchParams.put("LTE_czkssj", sf.parse(czsjs[1]));
+				searchParams.put("GTE_czkssj", czsjs[0]);
+				searchParams.put("LTE_czkssj", czsjs[1]);
 				}
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		
 		com.hyq.lpg.common.Page<FillRecords> page = fillRecordService.queryFillRecordByMybatisPage(p,searchParams);
 		Map m = Maps.newHashMap();
 		m.put("iTotalRecords", page.getCount());

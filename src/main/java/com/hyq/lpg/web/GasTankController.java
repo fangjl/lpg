@@ -1,13 +1,10 @@
 package com.hyq.lpg.web;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -103,33 +100,30 @@ public class GasTankController {
 			){
 		
 		com.hyq.lpg.common.Page p = new com.hyq.lpg.common.Page(request);
-		p.setPageNo(start);
+		p.setPageNo(start/pageSize+1);
 		p.setPageSize(pageSize);
 		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
 		
 		searchParams.put("tenantcode", CasUtils.getCurrentPrincipal().getTenantcode());
 
 		
-		try {   
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-DD");
+	
 			if(!StringUtils.isBlank(scrq)){
 				String[] scrqs = scrq.split("~");
-				searchParams.put("GTE_scrq",sf.parse(scrqs[0]) );
-				searchParams.put("LTE_scrq",sf.parse(scrqs[1]) );
+				searchParams.put("GTE_scrq",scrqs[0]);
+				searchParams.put("LTE_scrq",scrqs[1] );
 			}
 			if(!StringUtils.isBlank(czsj)){
 				String[] czsjs = czsj.split("~");
-				searchParams.put("GTE_czsj", sf.parse(czsjs[0]) );
-				searchParams.put("LTE_czsj", sf.parse(czsjs[1]) );
+				searchParams.put("GTE_czsj", czsjs[0] );
+				searchParams.put("LTE_czsj", czsjs[1] );
 				}
 			if(!StringUtils.isBlank(jdsj)){
 				String[] jdsjs = jdsj.split("~");
-				searchParams.put("GTE_jdsj", sf.parse(jdsjs[0]) );
-				searchParams.put("LTE_jdsj", sf.parse(jdsjs[1]) );
+				searchParams.put("GTE_jdsj", jdsjs[0] );
+				searchParams.put("LTE_jdsj", jdsjs[1] );
 				}
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		
 		com.hyq.lpg.common.Page<GasTank> page = gasTankService.queryTenantPageGasTank(p,searchParams);
 		Map m = Maps.newHashMap();
 		m.put("iTotalRecords", page.getCount());

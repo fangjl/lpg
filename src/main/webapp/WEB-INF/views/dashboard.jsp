@@ -80,7 +80,7 @@
 
 				<c:forEach var="officeRecordVo"
 					items="${today_count_fill_record_offices }">
-					<p>${officeRecordVo.officename}   -----  ${officeRecordVo.total } (瓶)</p>
+					<p>${officeRecordVo.officename}   -----  ${officeRecordVo.filltotal } (瓶)</p>
 					<div class="line line-lg pull-in"></div>
 				</c:forEach>
 

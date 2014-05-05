@@ -20,8 +20,7 @@
 	type="text/css" />
 <link rel="stylesheet" href="${ctx}/static/css/font-awesome.min.css"
 	type="text/css" />
-<link rel="stylesheet" href="${ctx}/static/css/font.css" type="text/css"
-	cache="false" />
+<link rel="stylesheet" href="${ctx}/static/css/font.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/static/js/fuelux/fuelux.css"
 	type="text/css" />
 <link rel="stylesheet" href="${ctx}/static/js/datatables/datatables.css"
@@ -32,10 +31,14 @@
 
 <link rel="stylesheet" href="${ctx}/static/js/select2-3.4.6/select2.css"
 	type="text/css" />
-<link rel="stylesheet" href="${ctx}/static/js/select2-3.4.6/select2-bootstrap-css/css/select2-bootstrap.css" type="text/css" />
+<link rel="stylesheet"
+	href="${ctx}/static/js/select2-3.4.6/select2-bootstrap-css/css/select2-bootstrap.css"
+	type="text/css" />
 
 
-<link rel="stylesheet" href="${ctx}/static/js/bootstrap-daterangepicker/daterangepicker-bs3.css" type="text/css" />
+<link rel="stylesheet"
+	href="${ctx}/static/js/bootstrap-daterangepicker/daterangepicker-bs3.css"
+	type="text/css" />
 
 
 <!--[if lt IE 9]>
@@ -53,23 +56,36 @@
 <script src="${ctx}/static/js/app.plugin.js" type="text/javascript"></script>
 
 <script src="${ctx}/static/js/fuelux/fuelux.js" type="text/javascript"></script>
-<script src="${ctx}/static/js/libs/jquery.pjax.js" cache="false" type="text/javascript"></script>
-<script src="${ctx}/static/js/libs/underscore-min.js" type="text/javascript"></script>
+<script src="${ctx}/static/js/libs/jquery.pjax.js" cache="false"
+	type="text/javascript"></script>
+<script src="${ctx}/static/js/libs/underscore-min.js"
+	type="text/javascript"></script>
 <!-- datatables -->
-<script src="${ctx}/static/js/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="${ctx}/static/js/datatables/jquery.dataTables.min.js"
+	type="text/javascript"></script>
 
 <!-- bootstrap-datepicker -->
-<script src="${ctx}/static/js/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
-<script src="${ctx}/static/js/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+<script src="${ctx}/static/js/bootstrap-daterangepicker/moment.min.js"
+	type="text/javascript"></script>
+<script src="${ctx}/static/js/bootstrap-daterangepicker/zh-cn.js"
+	type="text/javascript"></script>
+<script
+	src="${ctx}/static/js/bootstrap-daterangepicker/daterangepicker.js"
+	type="text/javascript"></script>
 
-<script src="${ctx}/static/js/charts/morris/raphael-min.js" cache="false" type="text/javascript"></script>
-<script src="${ctx}/static/js/charts/morris/morris.min.js" cache="false" type="text/javascript"></script>
+<script src="${ctx}/static/js/charts/morris/raphael-min.js"
+	cache="false" type="text/javascript"></script>
+<script src="${ctx}/static/js/charts/morris/morris.min.js" cache="false"
+	type="text/javascript"></script>
 <!-- jquery - form -->
-<script src="${ctx}/static/js/jquery-form/jquery.form.js" cache="false" type="text/javascript"></script>
+<script src="${ctx}/static/js/jquery-form/jquery.form.js" cache="false"
+	type="text/javascript"></script>
 
 <!-- jquery - select2 -->
-<script src="${ctx}/static/js/select2-3.4.6/select2.min.js" cache="false" type="text/javascript"></script>
-<script src="${ctx}/static/js/select2-3.4.6/select2_locale_zh-CN.js" cache="false" type="text/javascript"></script>
+<script src="${ctx}/static/js/select2-3.4.6/select2.min.js"
+	cache="false" type="text/javascript"></script>
+<script src="${ctx}/static/js/select2-3.4.6/select2_locale_zh-CN.js"
+	cache="false" type="text/javascript"></script>
 
 
 <sitemesh:head />
@@ -130,31 +146,21 @@
 	</div>
 	<nav class="nav-primary hidden-xs">
 	<ul class="nav">
-		<li class="active">
-			<a data-toggle="tab"  data-target="#content" data-pjax="" href="${ctx}/dashboard"> 
-				<i class="fa fa-eye fa-3x"></i> 
+		<li class="active"><a data-toggle="tab" data-target="#content"
+			data-pjax="" href="${ctx}/dashboard"> <i class="fa fa-eye fa-3x"></i>
 				<span>控制台</span>
-			</a>
-		</li>
-		<li>
-			<a data-toggle="tab" data-target="#content" data-pjax="" href="${ctx}/gastank/refluxRatio">
-				 <i class="fa fa-flask"></i> 
-				 <span>钢瓶档案</span>
-			</a>
-		</li>
-		<li>
-			<a data-toggle="tab" data-target="#content" data-pjax="" href="${ctx}/fillrecord/analysis"> 
-				<i class="fa fa-flask"></i> 
-				<span>充装记录</span>
-			</a>
-		</li>
-		
-		<li>
-			<a href="http://115.29.141.81:8080/ucenter" target="_top">
+		</a></li>
+		<li><a data-toggle="tab" data-target="#content" data-pjax=""
+			href="${ctx}/gastank/refluxRatio"> <i class="fa fa-flask"></i> <span>钢瓶档案</span>
+		</a></li>
+		<li><a data-toggle="tab" data-target="#content" data-pjax=""
+			href="${ctx}/fillrecord/analysis"> <i class="fa fa-flask"></i> <span>充装记录</span>
+		</a></li>
+
+		<li><a href="http://115.29.141.81:8080/ucenter" target="_top">
 				<i class="fa fa-flask"></i> <span>系统设置</span>
-			</a>
-		</li>
-		
+		</a></li>
+
 	</ul>
 	</nav> </section> <footer class="footer bg-gradient hidden-xs"> <a
 		href="http://115.29.141.81:8080/cas/logout"

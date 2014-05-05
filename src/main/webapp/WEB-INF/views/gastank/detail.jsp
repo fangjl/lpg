@@ -31,17 +31,17 @@
 		<form id="id_query_form"  action="${ctx}/gastank/queryGasTankPageData" role="form" class="form-horizontal"  >
 		
 			<div class="row">
-				<div class="col-lg-4">
+				<div class="col-xs-4">
 					<div class="form-group ">
-						<label  class="col-lg-4 control-label">钢瓶编码</label> 
-						<div class="col-lg-8">
+						<label  class="col-xs-4 control-label">钢瓶编码</label> 
+						<div class="col-xs-8">
 						<input name="search_LIKE_gpbm" type="text" placeholder="钢瓶编码"  class="form-control input-sm">
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label  class="col-lg-4 control-label">充装气站</label> 
-						<div class="col-lg-8">
+						<label  class="col-xs-4 control-label">充装气站</label> 
+						<div class="col-xs-8">
 							<select value="" name="search_EQ_officecode" class="form-control input-sm" placeholder="充装气站">
 							<option value="">全部</option>
 							<c:forEach var="office" items="${principal.offices }"  varStatus="status">
@@ -52,49 +52,49 @@
 					</div>
 					
 					<div class="form-group">
-						<label  class="col-lg-4 control-label">钢瓶厂家</label> 
-						<div class="col-lg-8">
+						<label  class="col-xs-4 control-label">钢瓶厂家</label> 
+						<div class="col-xs-8">
 							<select value="" name="search_EQ_sccj" class="form-control input-sm   " placeholder="钢瓶厂家">
 							<option value="">全部</option>
-							
+							<!-- 
 							<option value="1">A</option>
 							<option value="2">B</option>
 							<option value="3">C</option>
 							<option value="4">A</option>
 							<option value="5">B</option>
-							<option value="6">C</option>
+							<option value="6">C</option> -->
 							</select>
 						</div>
 					</div>
 					
 				</div>
-				<div class="col-lg-4">
+				<div class="col-xs-4">
 					<div class="form-group ">
-						<label  class="col-lg-4 control-label">出厂日期</label> 
-						<div class="col-lg-8">
+						<label  class="col-xs-4 control-label">出厂日期</label> 
+						<div class="col-xs-8">
 						<input id="id_ccsj" name="scrq" type="text" placeholder="出厂日期"  class="form-control input-sm">
 						</div>
 					</div>
 					
 					<div class="form-group ">
-						<label  class="col-lg-4 control-label">充装日期</label> 
-						<div class="col-lg-8">
+						<label  class="col-xs-4 control-label">充装日期</label> 
+						<div class="col-xs-8">
 						<input id="id_czsj" name="czsj" type="text" placeholder="充装日期"  class="form-control input-sm">
 						</div>
 					</div>
 					<div class="form-group ">
-						<label  class="col-lg-4 control-label">注册日期</label> 
-						<div class="col-lg-8">
+						<label  class="col-xs-4 control-label">注册日期</label> 
+						<div class="col-xs-8">
 						<input id="id_jdsj" name="jdsj" type="text" placeholder="注册日期"  class="form-control input-sm">
 						</div>
 					</div>
 				</div>
 				
-				<div class="col-lg-4">
+				<div class="col-xs-4">  
 				
 					<div class="form-group ">
-						<label class="col-lg-4 control-label">充装次数大于</label>
-						<div class="col-lg-8">
+						<label class="col-xs-4 control-label">充装次数大于</label>
+						<div class="col-xs-8">
 							<div class="spinner input-group" data-min="1">
 								<input type="text" class="form-control input-sm spinner-input" 
 									name="search_GT_zzcs">
@@ -110,8 +110,8 @@
 						</div>
 					</div>
 					<div class="form-group ">
-						<label class="col-lg-4 control-label">流失天数></label>
-						<div class="col-lg-8">
+						<label class="col-xs-4 control-label">流失天数></label>
+						<div class="col-xs-8">
 							<div class="spinner input-group" data-min="1">
 								<input type="text" class="form-control input-sm spinner-input" 
 									name="search_GT_lsts">
@@ -128,8 +128,8 @@
 					</div>
 					
 					<div class="form-group">
-						<label  class="col-lg-4 control-label">钢瓶状态</label> 
-						<div class="col-lg-8">
+						<label  class="col-xs-4 control-label">钢瓶状态</label> 
+						<div class="col-xs-8">
 							<select   name="search_EQ_gpzt" class="form-control input-sm" placeholder="钢瓶状态" value="">
 							<option value="" >全部</option>
 							<option value="0">正常</option>
@@ -147,8 +147,8 @@
 			
    
 			<div class="row">
-				 <div class="col-lg-4 ">
-				 <div class="col-lg-8 col-lg-offset-4  ">
+				 <div class="col-xs-4 ">
+				 <div class="col-xs-8 col-xs-offset-4  ">
 				 	<button class="btn btn-default btn-s-md btn-sm  btn-lg btn-block" type="submit">查询</button>
 				 
 				 </div>
@@ -301,25 +301,20 @@
 	}); 
 	
 	
-	
-	
 	$('#id_ccsj').daterangepicker({
 		timePicker : false,
 		format : 'YYYY-MM-DD',
 		separator:'~',
 		showWeekNumbers: false,
-	/* 	startDate: moment().subtract('month',7).format('YYYY-MM-DD'),
-        endDate: moment().format('YYYY-MM-DD'),
- */    
  	    minDate:  moment().subtract('year',8).format('YYYY-MM-DD'),
         maxDate: moment().format('YYYY-MM-DD'),
         showDropdowns: true,
         showWeekNumbers:true,
         opens: 'right',
         ranges: {
-            '三个月内': [moment().subtract('month', 3).startOf('month'), moment().subtract('month', 1).endOf('month')],
-    		'六个月内': [moment().subtract('month', 9).startOf('month'), moment().subtract('month', 1).endOf('month')],
-			'一年内': [moment().subtract('month', 12).startOf('month'), moment().subtract('month', 1).endOf('month')]
+        	
+            '今年': [moment().startOf('year'), moment().endOf('year')],
+            '去年':  [moment().subtract('year',1).startOf('year'), moment().subtract('year',1).endOf('year')]
 
         },
         locale: {
@@ -328,8 +323,6 @@
             fromLabel: '从',
             toLabel: '到',
             customRangeLabel: '其他',
-            daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
-            monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
             firstDay: 1
         }
 	}, 
@@ -342,16 +335,16 @@
 		format : 'YYYY-MM-DD',
 		separator:'~',
 		showWeekNumbers: false,
-		//startDate: moment().subtract('month',7).format('YYYY-MM-DD'),
-        //endDate: moment().format('YYYY-MM-DD'),
         minDate:  moment().subtract('month',48).format('YYYY-MM-DD'),
         maxDate: moment().format('YYYY-MM-DD'),
         showDropdowns: true,
         showWeekNumbers:true,
         opens: 'right',
         ranges: {
+        	'今天': [moment(), moment()],
     		'昨天': [moment().subtract('day', 1), moment().subtract('day', 1)],
-			'本月': [moment().startOf('month'), moment()]
+			'本月': [moment().startOf('month'), moment()],
+            '上个月': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
         },
         locale: {
             applyLabel: '确定',
@@ -359,8 +352,6 @@
             fromLabel: '从',
             toLabel: '到',
             customRangeLabel: '其他',
-            daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
-            monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
             firstDay: 1
         }
 	}, 
@@ -373,17 +364,21 @@
 		format : 'YYYY-MM-DD',
 		separator:'~',
 		showWeekNumbers: false,
-	//startDate: moment().subtract('month',7).format('YYYY-MM-DD'),
-     //   endDate: moment().format('YYYY-MM-DD'),
+
         minDate:  moment().subtract('year',8).format('YYYY-MM-DD'),
         maxDate: moment().format('YYYY-MM-DD'),
         showDropdowns: true,
         showWeekNumbers:true,
         opens: 'right',
         ranges: {
-            '三个月内': [moment().subtract('month', 3).startOf('month'), moment().subtract('month', 1).endOf('month')],
-    		'六个月内': [moment().subtract('month', 9).startOf('month'), moment().subtract('month', 1).endOf('month')],
-			'一年内': [moment().subtract('month', 12).startOf('month'), moment().subtract('month', 1).endOf('month')]
+            
+        	'今天': [moment(), moment()],
+    		'昨天': [
+    		         moment().subtract('day', 1).startOf('day'), 
+    		         moment().subtract('day', 1).startOf('day')
+    		         ],
+        	'本月':   [moment().startOf('month'), moment()],
+            '上个月': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
         },
         locale: {
             applyLabel: '确定',
@@ -391,8 +386,6 @@
             fromLabel: '从',
             toLabel: '到',
             customRangeLabel: '其他',
-            daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
-            monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
             firstDay: 1
         }
 	}, 

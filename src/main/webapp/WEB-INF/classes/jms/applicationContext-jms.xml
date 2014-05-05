@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<description>充装记录上传接收</description>
+
+	<!-- ActiveMQ 连接工厂 -->
+	<bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="${jms.broker_url}" />
+	</bean>
+	
+	
+	<!-- 充装记录绑定的Queue定义 -->
+	<bean id="fillrecordqueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="fill_record_dd" />
+	</bean>
+
+
+
+
+	<!-- 充装记录绑定的Queue定义 -->
+	<bean id="gastankqueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="gas_tank_sy" />
+	</bean>
+
+
+	<!-- 异步接收Queue消息Container -->
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="activeMQConnectionFactory" />
+		<property name="destination" ref="fillrecordqueue" />
+		<property name="messageListener" ref="fillRecordListener" />
+		<!-- 初始5个Consumer, 可动态扩展到10 -->
+		<property name="concurrentConsumers" value="5" />
+		<property name="maxConcurrentConsumers" value="10" />
+		<!-- 设置消息确认模式为Client -->
+		<property name="sessionAcknowledgeModeName" value="CLIENT_ACKNOWLEDGE" />
+	</bean>
+
+	<!-- 异步接收消息处理类 -->
+	<bean id="fillRecordListener" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<constructor-arg>
+			<bean class="com.hyq.lpg.jms.FillRecordConsumer"></bean>	
+		</constructor-arg>
+		<property name="messageConverter" ref="myMessageConverter"></property>
+		<property name="defaultListenerMethod" value="messageReceive"/>
+	</bean>
+	
+	
+	
+	
+
+	<!-- 异步接收Queue消息Container -->
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="activeMQConnectionFactory" />
+		<property name="destination" ref="gastankqueue" />
+		<property name="messageListener" ref="gasTankListener" />
+		<!-- 初始5个Consumer, 可动态扩展到10 -->
+		<property name="concurrentConsumers" value="5" />
+		<property name="maxConcurrentConsumers" value="10" />
+		<!-- 设置消息确认模式为Client -->
+		<property name="sessionAcknowledgeModeName" value="CLIENT_ACKNOWLEDGE" />
+	</bean>
+
+	<!-- 异步接收消息处理类 -->
+	<bean id="gasTankListener" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<constructor-arg>
+			<bean class="com.hyq.lpg.jms.GasTankConsumer"></bean>	
+		</constructor-arg>
+		<property name="messageConverter" ref="myMessageConverter"></property>
+		<property name="defaultListenerMethod" value="messageReceive"/>
+	</bean>
+	
+	
+	
+	
+	 <bean id="myMessageConverter" class="com.hyq.lpg.jms.MyMessageConverter"/>
+	
+
+</beans>

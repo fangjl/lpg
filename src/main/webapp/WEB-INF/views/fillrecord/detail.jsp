@@ -30,13 +30,13 @@
 	<div class="panel-body">
 		<form id="id_query_form"  action="${ctx}/fillrecord/getFillRecordGridData" role="form" class="form-horizontal"  >
 			<div class="row">
-				<div class="col-lg-3">
+				<div class="col-xs-3">
 					
 					<div class="form-group">
-						<label  class="col-lg-4 control-label">充装气站</label> 
-						<div class="col-lg-8">
+						<label  class="col-xs-4 control-label">充装气站:</label> 
+						<div class="col-xs-8">
 							<select value="" name="search_EQ_officecode" class="form-control input-sm" placeholder="充装气站">
-							
+							 
 							<option value="">全部</option>
 							<c:forEach var="office" items="${principal.offices }"  varStatus="status">
 								<option value="${office.key }">${ office.value}</option>		
@@ -46,26 +46,33 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3">
-					
-					
+				
+				<div class="col-xs-2">
 					<div class="form-group ">
-							<label  class="col-lg-4 control-label">钢瓶编码</label> 
-							<div class="col-lg-8">
-							<input name="search_LIKE_gpbm" type="text" placeholder="钢瓶编码"  class="form-control input-sm">
+							<label  class="col-xs-6 control-label">工位号:</label> 
+							<div class="col-xs-6">
+							<input name="search_EQ_cjqbm" type="text" placeholder="工位号"  class="form-control input-sm">
 							</div>
 						</div>
 				</div>
-				<div class="col-lg-3">
+				<div class="col-xs-2">
+					<div class="form-group ">
+							<label  class="col-xs-6 control-label">钢印号:</label> 
+							<div class="col-xs-6">
+							<input name="search_LIKE_gpbm" type="text" placeholder="钢印号"  class="form-control input-sm">
+							</div>
+						</div>
+				</div>
+				<div class="col-xs-3">
 						<div class="form-group ">
-						<label  class="col-lg-4 control-label">充装时间</label> 
-						<div class="col-lg-8">
+						<label  class="col-xs-4 control-label">充装时间:</label> 
+						<div class="col-xs-8">
 						<input id="id_czsj" name="czsj" type="text" placeholder="充装时间"  class="form-control input-sm">
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3">
-						<div class="col-lg-5">
+				<div class="col-xs-1">
+						<div class="col-xs-5">
 							<button class="btn btn-default btn-s-md btn-sm   btn-block" type="submit">查询</button>
 						</div>
 				</div>
@@ -133,8 +140,8 @@
 					bAutoWidth : true,
 					"sPaginationType" : "full_numbers",
 					"iDisplayLength" : 20,
-					// bStateSave:false, //开关，是否打开客户端状态记录功能。这个数据是记录在cookies中的，打开了这个记录后，即使刷新一次页面，或重新打开浏览器，之前的状态都是保存下来的
-					bSort : true, //开关，是否让各列具有按列排序功能
+					 bStateSave:true, //开关，是否打开客户端状态记录功能。这个数据是记录在cookies中的，打开了这个记录后，即使刷新一次页面，或重新打开浏览器，之前的状态都是保存下来的
+					bSort : false, //开关，是否让各列具有按列排序功能
 					//bScrollInfinite:true, //开关，以指定是否无限滚动（与sScrollY配合使用），在大数据量的时候很有用。当这个标志为true的时候，分页器就默认关闭
 					"aoColumns" : [/*  {
 						"mData" : "tenantcode"
@@ -165,21 +172,24 @@
 		//timePickerIncrement : 30,
 		format : 'YYYY-MM-DD',
 		separator:'~',
-		showWeekNumbers: false,
-		startDate: moment().subtract('month',7).format('YYYY-MM-DD'),
+		showWeekNumbers: false, 
+		startDate: moment().subtract('day',7).format('YYYY-MM-DD'),
         endDate: moment().format('YYYY-MM-DD'),
        // minDate:  moment().subtract('month',12).format('YYYY-MM-DD'),
-       // maxDate: moment().format('YYYY-MM-DD'),
+        maxDate: moment().format('YYYY-MM-DD'),
         showDropdowns: true,
         showWeekNumbers:true,
-       // customRangeLabel: 'Custom',
         opens: 'right',
         ranges: {
-            '三个月内': [moment().subtract('month', 3).startOf('month'), moment()],
-    	//	'四个月内': [moment().subtract('month', 4).startOf('month'), moment().subtract('month', 1).endOf('month')],
-    	//	'五个月内': [moment().subtract('month', 5).startOf('month'), moment().subtract('month', 1).endOf('month')],
-    		'六个月内': [moment().subtract('month', 9).startOf('month'), moment()],
-			'一年内': [moment().subtract('month', 12).startOf('month'), moment()]
+            '今天': [moment(), moment()],
+    		'昨天': [
+    		         moment().subtract('day', 1).startOf('day'), 
+    		         moment().subtract('day', 1).startOf('day')
+    		         ],
+			'前天': [
+			         moment().subtract('day', 2).startOf('day'), 
+			         moment().subtract('day', 2).startOf('day') 
+			        ]
 
         },
         locale: {
@@ -188,8 +198,6 @@
             fromLabel: '从',
             toLabel: '到',
             customRangeLabel: '其他',
-            daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
-            monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
             firstDay: 1
         }
 	}, 

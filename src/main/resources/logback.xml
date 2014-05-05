@@ -30,20 +30,22 @@
 	<logger name="org.apache.activemq"  level="INFO"/>
 	<logger name="org.apache.ibatis"    level="INFO"/>
 	<logger name="org.mybatis.spring"   level="INFO"/>
-	<logger name="druid.sql"    level="INFO"/>
-		<logger name="druid.sql.DataSource"    level="INFO"/>
-		<logger name="druid.sql.Statement"    level="INFO"/>
 	
 	
+		<logger name="com.alibaba.druid.sql"    level="INFO"/>
+		<logger name="com.alibaba.druid.sql.DataSource"    level="INFO"/>
+		<logger name="com.alibaba.druid.sql.Connection"    level="INFO"/>
+		<logger name="com.alibaba.druid.sql.Statement"    level="INFO"/>
+		<logger name="com.alibaba.druid.sql.ResultSet"    level="INFO"/>
 	
 	<logger name="com.hyq.lpg.cas"    level="INFO"/>
 	
-	
+	<!-- 
 	<logger name="jdbc.sqlonly"       level="OFF"/>
 	<logger name="jdbc.sqltiming"     level="INFO"/>
 	<logger name="jdbc.audit"     	  level="OFF"/>
 	<logger name="jdbc.resultset"     level="OFF"/>
-	<logger name="jdbc.connection"    level="OFF"/>
+	<logger name="jdbc.connection"    level="OFF"/> -->
 	
 	<root level="WARN">
 		<appender-ref ref="console" />

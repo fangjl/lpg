@@ -111,27 +111,27 @@
 			
 			<!-- 生产时间-->
 			<if test="GTE_scrq != null and GTE_scrq != ''">
-				and scrq <![CDATA[>=]]> #{GTE_scrq}
+				and DATE_FORMAT(scrq,'%Y-%m-%d') <![CDATA[>=]]> #{GTE_scrq}
 			</if>
 			
 			<if test="LTE_scrq != null and LTE_scrq != ''">
-				and scrq <![CDATA[<=]]> #{LTE_scrq}
+				and DATE_FORMAT(scrq,'%Y-%m-%d') <![CDATA[<=]]> #{LTE_scrq}
 			</if>
 			<!-- 最后充装时间-->
 			<if test="GTE_czsj != null and GTE_czsj != ''">
-				and czsj <![CDATA[>=]]> #{GTE_czsj}
+				and DATE_FORMAT(czsj,'%Y-%m-%d') <![CDATA[>=]]> #{GTE_czsj}
 			</if>
 			
 			<if test="LTE_czsj != null and LTE_czsj != ''">
-				and czsj <![CDATA[<=]]> #{LTE_czsj}
+				and DATE_FORMAT(czsj,'%Y-%m-%d') <![CDATA[<=]]> #{LTE_czsj}
 			</if>
 			<!-- 建档时间 -->
 			<if test="GTE_jdsj != null and GTE_jdsj != ''">
-				and jdsj <![CDATA[>=]]> #{GTE_jdsj}
+				and DATE_FORMAT(jdsj,'%Y-%m-%d') <![CDATA[>=]]> #{GTE_jdsj}
 			</if>
 			
 			<if test="LTE_jdsj != null and LTE_jdsj != ''">
-				and jdsj <![CDATA[<=]]> #{LTE_jdsj}
+				and DATE_FORMAT(jdsj,'%Y-%m-%d') <![CDATA[<=]]> #{LTE_jdsj}
 			</if>
 			
 			and del_flag = '0'

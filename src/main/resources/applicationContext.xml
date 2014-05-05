@@ -121,8 +121,8 @@
 			<property name="maxPoolPreparedStatementPerConnectionSize" value="20" /> -->
 			
 			<!-- 配置监控统计拦截的filters -->
-		    <property name="filters" value="stat,slf4j" /> 
-		    <property name="proxyFilters">
+<!-- 		    <property name="filters" value="stat,slf4j" /> 
+ -->		    <property name="proxyFilters">
 		        <list>
 		            <ref bean="log-filter"/>
 		        </list>

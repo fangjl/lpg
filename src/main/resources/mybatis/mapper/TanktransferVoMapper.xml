@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.hyq.lpg.repository.mybatis.TanktransferDao" >
+	<insert id="add" parameterType="Tanktransfer">
+		insert into tank_transfer_${tenantcode} (id, tenantcode, officecode, 
+		      officename, gpbm, xpbm, 
+		      ggxh, czjz, jwd, dz, 
+		      lzsj, czrcode, czrname, 
+		      remark, del_flag)
+    values (#{id,jdbcType=INTEGER}, #{tenantcode,jdbcType=VARCHAR}, #{officecode,jdbcType=VARCHAR}, 
+	      #{officename,jdbcType=VARCHAR}, #{gpbm,jdbcType=VARCHAR}, #{xpbm,jdbcType=VARCHAR}, 
+	      #{ggxh,jdbcType=INTEGER}, #{czjz,jdbcType=INTEGER}, #{jwd,jdbcType=VARCHAR}, #{dz,jdbcType=VARCHAR}, 
+	      #{lzsj,jdbcType=TIMESTAMP}, #{czrcode,jdbcType=VARCHAR}, #{czrname,jdbcType=VARCHAR}, 
+	      #{remark,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER})
+	</insert>
+
+</mapper> 

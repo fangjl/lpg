@@ -1,12 +1,9 @@
 package com.hyq.lpg.entity;
 import java.util.Date;
-
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -17,33 +14,19 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hyq.lpg.common.Page;
 
-@Entity
-@Table(name="gas_tank")
 public class GasTank<T> implements java.io.Serializable{
-	
 	private static final long serialVersionUID = -5579791647847368079L;
- 
 	protected Long id;
-	
 	private String tenantcode;	//所属租户编码
 	private String officecode;  //所属机构编码
-	@Column(name="gpbm",length=15)
 	private String gpbm;   //钢瓶编码
-	@Column(name="xpbm",length=20)
 	private String xpbm; //RFID芯片编码
-	@Column(name="jdsj")
 	private Date jdsj;//建档时间
-    @Column(name="jdr",length=10)
 	private String jdr;//建档人
-	@Column(name="update_date")
 	private Date updateDate;//修改时间
-	@Column(name="gpid",length=20)
 	private String gpid; //全局一维码
-	@Column(name="barcode",length=30)
 	private String barcode; //一维码
-	@Column(name="zdbm",length=15)
 	private String zdbm;  //(站点编码)
-	@Column(name="khbm",length=15)
 	private String khbm;//(客户编码)
 	@Column(name="scrq")
 	@DateTimeFormat(iso=ISO.DATE)
@@ -66,7 +49,6 @@ public class GasTank<T> implements java.io.Serializable{
 	private Integer synx;  //使用年限
 	@Column(name="qjzq")
 	private Integer qjzq;  //强检查周期
-	
 	@Column(name="first_czsj")
 	private java.util.Date firstCzsj; //最后充装时间
 	@Column(name="czsj")
@@ -75,7 +57,6 @@ public class GasTank<T> implements java.io.Serializable{
 	private Integer jdfs;   //建档方式 (0:PDA 建档)
 	@Column(name="ywzt", columnDefinition="number(4,3,2,1,0) default 0")
 	private Integer ywzt;   //业务流转平台状态
-	
 	@Column(name="gpzt", columnDefinition="number(4,3,2,1,0) default 0")
 	private Integer gpzt;  //钢瓶状态
 	@Column(name="zzcs", columnDefinition="default 0")
@@ -84,7 +65,6 @@ public class GasTank<T> implements java.io.Serializable{
 	public Integer getLsts() {
 		return lsts;
 	}
-
 	public void setLsts(Integer lsts) {
 		this.lsts = lsts;
 	}

@@ -47,47 +47,30 @@
     <script src="${ctx}/static/js/ie/fix.js" cache="false"></script>
   <![endif]-->
 
-
 <script src="${ctx}/static/js/jquery.min.js" type="text/javascript"></script>
 <!-- Bootstrap -->
 <script src="${ctx}/static/js/bootstrap.js" type="text/javascript"></script>
 <!-- App -->
 <script src="${ctx}/static/js/app.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/app.plugin.js" type="text/javascript"></script>
-
 <script src="${ctx}/static/js/fuelux/fuelux.js" type="text/javascript"></script>
-<script src="${ctx}/static/js/libs/jquery.pjax.js" cache="false"
-	type="text/javascript"></script>
-<script src="${ctx}/static/js/libs/underscore-min.js"
-	type="text/javascript"></script>
+<script src="${ctx}/static/js/libs/jquery.pjax.js" type="text/javascript"></script>
+<script src="${ctx}/static/js/libs/underscore-min.js" type="text/javascript"></script>
 <!-- datatables -->
-<script src="${ctx}/static/js/datatables/jquery.dataTables.min.js"
-	type="text/javascript"></script>
-
+<script src="${ctx}/static/js/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
 <!-- bootstrap-datepicker -->
-<script src="${ctx}/static/js/bootstrap-daterangepicker/moment.min.js"
-	type="text/javascript"></script>
-<script src="${ctx}/static/js/bootstrap-daterangepicker/zh-cn.js"
-	type="text/javascript"></script>
-<script
-	src="${ctx}/static/js/bootstrap-daterangepicker/daterangepicker.js"
-	type="text/javascript"></script>
+<script src="${ctx}/static/js/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
+<script src="${ctx}/static/js/bootstrap-daterangepicker/zh-cn.js" type="text/javascript"></script>
+<script src="${ctx}/static/js/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
 
-<script src="${ctx}/static/js/charts/morris/raphael-min.js"
-	cache="false" type="text/javascript"></script>
-<script src="${ctx}/static/js/charts/morris/morris.min.js" cache="false"
-	type="text/javascript"></script>
+<script src="${ctx}/static/js/charts/morris/raphael-min.js"  type="text/javascript"></script>
+<script src="${ctx}/static/js/charts/morris/morris.min.js"   type="text/javascript"></script>
 <!-- jquery - form -->
-<script src="${ctx}/static/js/jquery-form/jquery.form.js" cache="false"
-	type="text/javascript"></script>
-
+<script src="${ctx}/static/js/jquery-form/jquery.form.js"    type="text/javascript"></script>
 <!-- jquery - select2 -->
-<script src="${ctx}/static/js/select2-3.4.6/select2.min.js"
-	cache="false" type="text/javascript"></script>
-<script src="${ctx}/static/js/select2-3.4.6/select2_locale_zh-CN.js"
-	cache="false" type="text/javascript"></script>
-
-
+<script src="${ctx}/static/js/select2-3.4.6/select2.min.js"  type="text/javascript"></script>
+<script src="${ctx}/static/js/select2-3.4.6/select2_locale_zh-CN.js"  type="text/javascript"></script>
+<link rel="shortcut icon" href="${ctx}/static/favicon.ico">
 <sitemesh:head />
 </head>
 <body>

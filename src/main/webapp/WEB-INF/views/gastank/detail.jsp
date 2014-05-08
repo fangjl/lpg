@@ -5,12 +5,9 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <head>
 <title>钢瓶档案查询</title>
-
-
 </head>
 <section class="vbox"> <header class="header bg-dark">
 <ul class="nav nav-tabs">
-
 	<li class=""><a data-toggle="tab" data-target="#content" data-pjax="" href="${ctx}/gastank/refluxRatio">回流率分析</a></li>
 	<li class=""><a data-toggle="tab" data-target="#content" data-pjax="" href="${ctx}/gastank/analysis">统计分析</a></li>
 	<li class="active"><a>详细查询</a></li>
@@ -89,7 +86,6 @@
 						</div>
 					</div>
 				</div>
-				
 				<div class="col-xs-4">  
 				
 					<div class="form-group ">
@@ -140,12 +136,7 @@
 					</div>
 
 				</div>
-				
-			
-			
 			</div>
-			
-   
 			<div class="row">
 				 <div class="col-xs-4 ">
 				 <div class="col-xs-8 col-xs-offset-4  ">
@@ -155,8 +146,6 @@
 				    </div>
 			</div>
 		</form>
-		
-		
 	</div>
 	<div class="table-responsive">
 		<table id="DataTables_Table_0" class="table table-striped m-b-none"
@@ -171,8 +160,8 @@
  						<th width="4%">下次<br>检验</th>
  						<th width="14%">最后充装时间</th>
  						<th width="8%">充装<br>次数</th>
- 						<th width="10%">流失<br>(天)</th>
- 						<th width="4%" >皮重(KG)</th>
+<!--  						<th width="10%">流失<br>(天)</th>
+ --> 						<th width="4%" >皮重(KG)</th>
  						<th width="8%" >注册人</th>
  						<th width="8%">状态</th>
 				</tr>
@@ -229,17 +218,11 @@
 					// bStateSave:false, //开关，是否打开客户端状态记录功能。这个数据是记录在cookies中的，打开了这个记录后，即使刷新一次页面，或重新打开浏览器，之前的状态都是保存下来的
 					bSort : false, //开关，是否让各列具有按列排序功能
 					//bScrollInfinite:true, //开关，以指定是否无限滚动（与sScrollY配合使用），在大数据量的时候很有用。当这个标志为true的时候，分页器就默认关闭
-					
-					
 					"aoColumns" : [{
 						"mData" : "officecode",fnRender:function(oObj){
-
-
-							
 								var key = oObj.aData["officecode"];
 								//alert(key);
 								return  principal.offices[key];
-								
 								//return "${principal.offices['"+key+"']}";
 							}
 					},{
@@ -256,7 +239,9 @@
 						"mData" : "czsj"
 					},{
 						"mData" : "zzcs"
-					},{"mData" : "lsts",fnRender:function(oObj){
+					},
+					
+					/* {"mData" : "lsts",fnRender:function(oObj){
 						
 						 	if( oObj.aData["lsts"]!=null && oObj.aData["lsts"]!='' && oObj.aData["lsts"]!='null' ){
 						 		return "<font color='red'>"+oObj.aData["lsts"]+"</font>";
@@ -265,7 +250,10 @@
 							} 
 						
 						}
-					},{
+					},
+					 */
+					
+					{
 						"mData" : "pz"
 					},{
 						"mData" : "fpr"

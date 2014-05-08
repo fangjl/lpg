@@ -53,6 +53,7 @@
 				/shiro-cas = casFilter
 				/druid/** = anon
 				/** = user
+				/transfer/*=anon
 			</value>
 		</property>
 	</bean>
